@@ -55,4 +55,4 @@ providers:
     docker:
         endpoint: "unix:///var/run/docker.sock"
         network: idev_network
-        defaultRule: "Host(`{{ trimPrefix `/` .Name }}.idev-present.localhost`)"
+        defaultRule: "Host(`{{ trimPrefix `/` .Name }}.idev-present.ru`)"

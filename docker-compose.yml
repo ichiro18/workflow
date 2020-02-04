@@ -2,9 +2,51 @@ version: '3.4'
 
 services:
 
+  jira:
+    build: 
+      context: .
+      dockerfile: provision/Dockerfile
+    container_name: idev_jira
+    restart: always
+    environment:
+      - TZ='Europe/Moscow'
+    depends_on:
+      - mysql
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jira.rule=Host(`jira.idev-present.ru`)"
+      - "traefik.http.services.jira.loadbalancer.server.port=8080"
+    ports:
+      - "8080:8080"
+    volumes:
+      - home_data:/var/jira
+    networks:
+      - idev_network
+
+  mysql:
+    image: mysql:5.7
+    container_name: idev_jiraDB
+    restart: always
+    environment:
+      - TZ='Europe/Moscow'
+      - MYSQL_DATABASE=idev_jiraDB
+      - MYSQL_ROOT_PASSWORD=dv3I8QWQ6kgaXI46lbPH
+      - MYSQL_USER=idev_jira
+      - MYSQL_PASSWORD=dv3I8QWQ6kgaXI46lbPH
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin']
+    labels:
+      - "traefik.enable=false"
+    ports:
+      - "13306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - idev_network
+
   proxy:
     image: traefik:v2.0
     container_name: idev_proxy
+    restart: always
     ports:
       - "80:80"
       - "443:443"
@@ -30,3 +72,6 @@ networks:
       name: idev_network
   default:
     driver: bridge
+
+
+    
