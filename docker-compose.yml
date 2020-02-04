@@ -9,11 +9,13 @@ services:
       # - "8080:8080"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.idev.rule=Host(`proxy.idev-present.ru`)"
-      - "traefik.port=8080"
-      - "traefik.docker.network=idev_network"
+      - "traefik.http.routers.api.rule=Host(`proxy.idev-present.ru`)"
+      # - "traefik.http.services.idev.api.server.port=80"
+      - "traefik.http.routers.api.service=api@internal"
+      - "traefik.http.routers.api.middlewares=auth"
+      - "traefik.http.middlewares.auth.basicauth.users=admin:$apr1$CbPtxdgO$R4MpeTYh2ok2.kU7hoxNF1
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik/traefik.yml:/etc/traefik/traefik.yml
     networks:
       - default
