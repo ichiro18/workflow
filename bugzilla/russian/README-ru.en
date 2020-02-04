@@ -1,0 +1,97 @@
+Bugzilla-ru is a Russian localization of Bugzilla bug tracking system.
+
+For more info about Bugzilla see http://www.bugzilla.org/
+
+To see how it works you can try:
+
+version 3.2.5: http://landfill.bugzilla.org/bugzilla_l10n/
+
+Installation
+~~~~~~~~~~~~
+
+Download and install mainstream Bugzilla (http://www.bugzilla.org/download/)
+
+Untar all these over your Bugzilla installation.  There are no
+overlapping files.  You'll see template/ru/ and help/ru/.  
+
+Carefully check owner/group and mask on files and rerun checksetup.pl.
+
+Templates here correspond to Bugzilla version 3.5.2
+
+Configuration
+~~~~~~~~~~~~~
+
+Web page language is determined automatically, based on browser settings.
+Also, there is explicit language selector on every page header.  Its value 
+is stored per browser.
+
+Email message language can be selected by each user, under 'General 
+Preferences': .../userprefs.cgi#lang
+
+Default value for email message language is setable by administrator:
+.../editsettings.cgi#lang
+
+Values of selectable database fields can be translated by copying 
+template/ru/default/global/field-descs.none.tmpl to 
+template/ru/custom/global/field-descs.none.tmpl and editing value_descs 
+hash.
+
+Support
+~~~~~~~
+
+To report localization-related bugs use:
+
+	https://bugzilla.mozilla-russia.org/
+
+Your questions are welcome at:
+
+	https://sourceforge.net/projects/bugzilla-ru/forums
+
+See also README-ru about more support options available in Russian only.
+
+Known problems
+~~~~~ ~~~~~~~~
+
+Templates lacking visible texts are intentionally left outside Bugzilla-ru.
+
+Listed below are several Cyrillic-related problems not fixed or
+introduced in 3.4:
+
+Localized checksetup.pl messages require UTF-8 capable console.
+https://bugzilla.mozilla.org/show_bug.cgi?id=382398
+Workaround for Windows users: select Lucida Console font for cmd window,
+then issue 'chcp 65001' before checksetup.pl.  Another option: remove
+template/ru/default/setup/strings.txt.pl and
+template/ru/default/global/messages.html.tmpl temporarily, and restore
+both after checksetup.pl runs have been done.
+
+Cyrillic True Type fonts for charts and dependency graphs are not 
+supported under Windows.
+https://bugzilla.mozilla.org/show_bug.cgi?id=287682
+https://bugzilla.mozilla.org/show_bug.cgi?id=427961
+
+Credits
+~~~~~~~
+
+Ilya Shevchik <ilyasia@users.sourceforge.net> and 
+Dmitry Pupkov <dpupkov@mccme.ru> helped a lot in 2.20 translation.
+
+Alexander L. Slovesnik (Unghost) proofread the entire template set.
+
+Frédéric Buclin <lpsolit@gmail.com>, for running demo site.
+
+Good <jeka@infotrans-logistic.ru> made 2.22rc1.
+
+TODO
+~~~~
+
+If you are fluent in Russian, please read README-ru about how you can
+help.
+
+--
+No easy hope or lies        | Vitaly "Willy the Pooh" Fedrushkov
+Shall bring us to our goal, | fedrushkov@users.sourceforge.net
+But iron sacrifice          | ICQ 48298278
+Of Body, Will and Soul.     | +7 351 2475049
+                  R.Kipling |
+

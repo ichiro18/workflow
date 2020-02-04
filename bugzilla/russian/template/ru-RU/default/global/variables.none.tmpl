@@ -1,0 +1,63 @@
+[%# This Source Code Form is subject to the terms of the Mozilla Public
+  # License, v. 2.0. If a copy of the MPL was not distributed with this
+  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+  #
+  # This Source Code Form is "Incompatible With Secondary Licenses", as
+  # defined by the Mozilla Public License, v. 2.0.
+  #%]
+
+[%# This is a list of terms that may be changed to "brand" the Bugzilla 
+  # instance (for example, referring to "bugs" as "issues".) When used, these
+  # strings are used in several different types of content, and are not  
+  # protected with Template-Toolkit FILTERs. Consequently, no special 
+  # characters are allowed.
+  #
+  # Remember to PROCESS rather than INCLUDE this template. 
+  #%]
+
+[% terms = {
+  "bug"      => "ошибка",
+  "bug_gen"  => "ошибки",
+  "bug_dat"  => "ошибке",
+  "bug_acc"  => "ошибку",
+  "bug_abl"  => "ошибкой",
+  "bug_obj"  => "ошибке",
+  "Bug"      => "Ошибка",
+  "Bug_gen"  => "Ошибки",
+  "Bug_dat"  => "Ошибке",
+  "Bug_acc"  => "Ошибку",
+  "Bug_abl"  => "Ошибкой",
+  "Bug_obj"  => "Ошибке",
+  "abug"     => "ошибка", # стараемся не использовать в Bugzilla-ru
+  "ABug"     => "Ошибка", # стараемся не использовать в Bugzilla-ru
+  "bugs"     => "ошибки",
+  "bugs_gen" => "ошибок",
+  "bugs_dat" => "ошибкам",
+  "bugs_acc" => "ошибки",
+  "bugs_abl" => "ошибками",
+  "bugs_obj" => "ошибках",
+  "Bugs"     => "Ошибки",
+  "Bugs_gen" => "Ошибок",
+  "Bugs_dat" => "Ошибкам",
+  "Bugs_acc" => "Ошибки",
+  "Bugs_abl" => "Ошибками",
+  "Bugs_obj" => "Ошибках",
+  "zeroSearchResults" => "Ошибок не найдено",
+  "Bugzilla" => "Bugzilla"
+  }
+%]
+
+[% MACRO numeral(n, name1, name2, name5) BLOCK %]
+  [% n1 = n % 10 %]
+  [% n10 = n % 100 - n1 %]
+  [% IF n10 == 10 || n1 == 0 || n1 > 4 %]
+    [% name5 %]
+  [% ELSIF n1 == 1 %]
+    [% name1 %]
+  [% ELSE %]
+    [% name2 %]
+  [% END %]
+[% END %]
+
+[% USE Hook %]
+[% Hook.process("end") %]
