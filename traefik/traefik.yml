@@ -28,6 +28,22 @@ api:
     insecure: true
 
 ################################################################
+# HTTP configuration
+################################################################
+http:
+    routers:
+        api:
+            rule: Host(`proxy.idev-present.ru`)
+            service: api@internal
+            middlewares:
+                - auth
+    middlewares:
+        auth:
+            basicAuth:
+                users:
+                    - "admin:$apr1$CbPtxdgO$R4MpeTYh2ok2.kU7hoxNF1"
+        
+################################################################
 # Ping configuration
 ################################################################
 
@@ -36,3 +52,4 @@ api:
 ################################################################
 providers:
     docker: {}
+
