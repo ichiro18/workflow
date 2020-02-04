@@ -1,57 +1,11 @@
-version: '3.4'
+version: '3'
 
 services:
-
-  # jira:
-  #   build: 
-  #     context: .
-  #     dockerfile: provision/Dockerfile
-  #   container_name: jira-srv
-  #   environment:
-  #     - TZ='Europe/Moscow'
-  #   depends_on:
-  #     - mysql
-  #   ports:
-  #     - "8080:8080"
-  #   volumes:
-  #     - home_data:/var/jira
-  #     - ./agent:/var/agent
-  #   restart: always
-  #   networks:
-  #     - idev-bridge
-
-  # mysql:
-  #   image: mysql:5.7
-  #   container_name: mysql-jira
-  #   environment:
-  #     - TZ='Europe/Moscow'
-  #     - MYSQL_DATABASE=jira
-  #     - MYSQL_ROOT_PASSWORD=123456
-  #     - MYSQL_USER=jira
-  #     - MYSQL_PASSWORD=123123
-  #   command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin']
-  #   ports:
-  #     - "13306:3306"
-  #   volumes:
-  #     - mysql_data:/var/lib/mysql
-  #   restart: always
-  #   networks:
-  #     - idev-bridge
-
   proxy:
     image: traefik:v2.0
-    command: --api.insecure=true --providers.docker
-    labels:
-      - "traefik.http.routers.idev.rule=Host(`proxy.idev-present.ru`)"
     ports:
       - "80:80"
       - "8080:8080"
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - idev-bridge
-
-networks:
-  idev-bridge:
-    driver: bridge
-    external: true
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./traefik/traefik.yml:/etc/traefik/traefik.yml"
