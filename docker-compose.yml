@@ -1,5 +1,9 @@
 version: '3.4'
 
+volumes:
+  jira_data: {}
+  jira_db: {}
+
 services:
 
   jira:
@@ -19,7 +23,7 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      - home_data:/var/jira
+      - jira_data:/var/jira
     networks:
       - idev_network
 
@@ -39,7 +43,7 @@ services:
     ports:
       - "13306:3306"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - jira_db:/var/lib/mysql
     networks:
       - idev_network
 
