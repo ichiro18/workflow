@@ -26,12 +26,27 @@ log:
 ################################################################
 api:
     dashboard: true
-    insecure: true
+    # insecure: true
     debug: true
         
 ################################################################
 # Ping configuration
 ################################################################
+
+        
+################################################################
+# HTTPS & TLS configuration
+################################################################
+certificatesResolvers:
+    leresolver:
+        acme:
+            caserver: https://acme-staging-v02.api.letsencrypt.org/directory
+            email: ichirozcom@gmail.com
+            storage: /acme.json
+            tlsChallenge: {}
+            httpChallenge:
+                entryPoint: web
+
 
 ################################################################
 # Docker configuration backend
