@@ -18,7 +18,7 @@ services:
       - "5900:5900"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.proxy.rule=Host(`flow.idev-present.local`)"
+      - "traefik.http.routers.proxy.rule=Host(`flow.idev-present.ru`)"
       - "traefik.http.routers.proxy.entrypoints=web"
     volumes:
       - ./bugzilla/config:/usr/local/apache2/htdocs/localconfig
@@ -56,7 +56,7 @@ services:
       - "443:443"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.proxy.rule=Host(`proxy.idev-present.local`)"
+      - "traefik.http.routers.proxy.rule=Host(`proxy.idev-present.ru`)"
       - "traefik.http.routers.proxy.middlewares=auth"
       - "traefik.http.routers.proxy.service=api@internal"
       - "traefik.http.routers.proxy.entrypoints=websecure"
