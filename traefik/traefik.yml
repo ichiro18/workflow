@@ -19,12 +19,15 @@ entryPoints:
 ################################################################
 # Traefik logs configuration
 ################################################################
-
+log:
+    level: DEBUG
 ################################################################
 # API and dashboard configuration
 ################################################################
 api:
     dashboard: true
+    insecure: true
+    debug: true
         
 ################################################################
 # Ping configuration
@@ -34,5 +37,7 @@ api:
 # Docker configuration backend
 ################################################################
 providers:
-    docker: {}
-
+    docker:
+        endpoint: "unix:///var/run/docker.sock"
+        network: idev_network
+        defaultRule: "Host(`{{ trimPrefix `/` .Name }}.idev-present.ru`)"
