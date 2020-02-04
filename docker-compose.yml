@@ -14,7 +14,7 @@ services:
       # - "traefik.http.services.idev.api.server.port=80"
       - "traefik.http.routers.proxy.service=api@internal"
       - "traefik.http.routers.proxy.middlewares=auth"
-      - "traefik.http.middlewares.proxy.basicauth.users=admin:$apr1$CbPtxdgO$R4MpeTYh2ok2.kU7hoxNF1"
+      - "traefik.http.middlewares.auth.basicauth.users=user:$$apr1$$q8eZFHjF$$Fvmkk//V6Btlaf2i/ju5n/"
       # - "traefik.http.routers.whoami.entrypoints=web"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
