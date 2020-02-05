@@ -40,7 +40,7 @@ api:
 certificatesResolvers:
     leresolver:
         acme:
-            caserver: https://acme-staging-v02.api.letsencrypt.org/directory
+            caServer: https://acme-staging-v02.api.letsencrypt.org/directory
             email: ichirozcom@gmail.com
             storage: /acme.json
             tlsChallenge: {}

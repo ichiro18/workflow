@@ -13,13 +13,10 @@ services:
       - mysql
     environment:
       - TZ='Europe/Moscow'
-    ports:
-      - "80:80"
-      - "5900:5900"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.proxy.rule=Host(`flow.idev-present.ru`)"
-      - "traefik.http.routers.proxy.entrypoints=web"
+      - "traefik.http.routers.flow.rule=Host(`flow.idev-present.ru`)"
+      - "traefik.http.routers.flow.entrypoints=web"
     volumes:
       - ./bugzilla/config:/usr/local/apache2/htdocs/localconfig
       - ./bugzilla/russian/help:/usr/local/apache2/htdocs/help
@@ -60,8 +57,10 @@ services:
       - "traefik.http.routers.proxy.middlewares=auth"
       - "traefik.http.routers.proxy.service=api@internal"
       - "traefik.http.routers.proxy.entrypoints=websecure"
+      - "traefik.http.routers.proxy.tls=true"
       - "traefik.http.routers.proxy.tls.certresolver=leresolver"
       - "traefik.http.middlewares.auth.basicauth.users=user:$$apr1$$q8eZFHjF$$Fvmkk//V6Btlaf2i/ju5n/"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./traefik/traefik.yml:/etc/traefik/traefik.yml
